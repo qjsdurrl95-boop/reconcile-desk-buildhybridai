@@ -4,6 +4,8 @@ Reconcile invoice and payment CSVs in the browser. Review split payments, overpa
 
 ## Try the app
 
+Open the [hosted demo](https://qjsdurrl95-boop.github.io/reconcile-desk-buildhybridai/) to compare fictional CSVs and review the exceptions in your browser. The hosted build runs the reconciliation and the rules-based memo. Use the local setup below to configure and test the AI paths.
+
 Use Node.js 22.12 or later.
 
     npm ci
@@ -25,7 +27,7 @@ Create a Firebase web app in a Spark project. Set up Firebase AI Logic with the 
 
 Select **Prioritize on device** in a Chrome environment that supports the built-in model. The app also has an explicit **Allow cloud fallback** action, available with App Check configured. That action first tries the on-device route and may ask a cloud model if the local model is unavailable. The input preview lists exactly which exception categories and counts go into the prompt. Invoice IDs, payment IDs, currencies and amounts stay in the browser.
 
-The verified exception table and rules-based review memo remain available when AI is unavailable. When AI returns a valid priority order, the result identifies the inference route used.
+The review memo labels the response **On-device AI** or **Cloud fallback** when the Firebase SDK returns a validated priority order. The [submission video](https://www.youtube.com/watch?v=THa28f0xtng) shows the verified Gemini cloud response. To test the on-device path, use a desktop that meets the [Chrome built-in AI requirements](https://developer.chrome.com/docs/ai/get-started#hardware), then follow Firebase's Chrome setup steps below. The exception table and rules-based memo are available while the model prepares or if it is unavailable.
 
 See [Firebase hybrid inference for web](https://firebase.google.com/docs/ai-logic/hybrid/web/get-started) and [Gemini Developer API pricing in Firebase](https://firebase.google.com/docs/ai-logic/pricing?api=dev).
 
