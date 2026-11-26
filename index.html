@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Reconcile invoice and payment CSVs, then prepare a review memo.">
+    <title>Reconcile Desk</title>
+  </head>
+  <body>
+    <main>
+      <header class="page-header">
+        <div>
+          <h1>Reconcile Desk</h1>
+          <p>Match invoices to payments and prepare a review memo.</p>
+        </div>
+        <button id="load-demo" type="button" class="secondary">Load sample data</button>
+      </header>
+
+      <details class="imports">
+        <summary>Import CSV files</summary>
+        <form id="import-form">
+          <label>Invoices <input id="invoice-file" type="file" accept=".csv,text/csv" required></label>
+          <label>Payments <input id="payment-file" type="file" accept=".csv,text/csv" required></label>
+          <button type="submit">Compare files</button>
+        </form>
+        <p class="fine-print">Use synthetic data for this demo. Supported currencies are USD and KRW.</p>
+      </details>
+      <p id="data-status" class="status" role="status"></p>
+
+      <section id="results" hidden aria-labelledby="exceptions-title">
+        <dl class="totals">
+          <div><dt>Invoices</dt><dd id="invoice-count"></dd></div>
+          <div><dt>Payments</dt><dd id="payment-count"></dd></div>
+          <div><dt>Exactly matched</dt><dd id="matched-count"></dd></div>
+          <div class="attention"><dt>Exceptions</dt><dd id="issue-count"></dd></div>
+        </dl>
+        <div class="workspace">
+          <section class="panel">
+            <h2 id="exceptions-title">Exceptions</h2>
+            <p id="exceptions-note" class="fine-print"></p>
+            <div class="table-scroll" tabindex="0" role="region" aria-label="Exceptions table">
+              <table>
+                <thead><tr><th scope="col">Issue</th><th scope="col">Invoice / payment</th><th scope="col">Amount to review</th></tr></thead>
+                <tbody id="issue-rows"></tbody>
+              </table>
+            </div>
+          </section>
+          <section class="panel memo" aria-labelledby="memo-title">
+            <h2 id="memo-title">Review memo</h2>
+            <p class="fine-print" id="memo-source"></p>
+            <ol id="memo-items"></ol>
+            <div id="ai-controls" hidden>
+              <div class="actions">
+                <button id="device-ai" type="button">Prioritize on device</button>
+                <button id="hybrid-ai" type="button" class="secondary">Allow cloud fallback</button>
+              </div>
+              <details>
+                <summary>Preview the AI input</summary>
+                <pre id="ai-packet"></pre>
+                <p class="fine-print">The fallback option may send these grouped counts to Gemini if the device model is unavailable.</p>
+              </details>
+            </div>
+            <p id="ai-status" class="status" role="status"></p>
+          </section>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

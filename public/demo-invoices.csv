@@ -1,0 +1,7 @@
+invoice_id,currency,amount_due
+EX-101,USD,120.00
+EX-102,USD,250.00
+EX-103,USD,40.00
+EX-104,USD,85.00
+EX-105,USD,70.00
+EX-106,KRW,35000
